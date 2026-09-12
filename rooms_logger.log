@@ -1,0 +1,10 @@
+2026-09-12 13:03:47,309 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2026-09-12 13:09:22,205 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2026-09-12 13:11:11,058 - django.utils.autoreload - INFO - D:\django\hotel_web_app\hotel_web_app\settings.py changed, reloading.
+2026-09-12 13:11:12,474 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2026-09-12 13:11:29,412 - django.utils.autoreload - INFO - D:\django\hotel_web_app\hotel_web_app\settings.py changed, reloading.
+2026-09-12 13:11:30,541 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2026-09-12 13:12:14,936 - django.utils.autoreload - INFO - D:\django\hotel_web_app\hotel_web_app\urls.py changed, reloading.
+2026-09-12 13:12:16,215 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
+2026-09-12 13:12:18,099 - django.utils.autoreload - INFO - D:\django\hotel_web_app\hotel_web_app\urls.py changed, reloading.
+2026-09-12 13:12:19,201 - django.utils.autoreload - INFO - Watching for file changes with StatReloader
