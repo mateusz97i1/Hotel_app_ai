@@ -1,16 +1,32 @@
+{% load static %}
+{% load django_htmx %}
 {% load tailwind_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Site</title>
+    <!-- Roboto font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
     {% tailwind_css %}
+    {% django_htmx_script %}
+    <title>Home</title>
 </head>
 
-<body>
-    <h1 class="text-2xl font-bold text-blue-600">Hello Tailwind!</h1>
+<body class="min-h-dvh antialiased font-roboto h-fit">
+    <!-- home screen -->
+    <section class="relative min-h-dvh w-full">
+        <div class="min-h-dvh w-full bg-[url('{% static 'png/Welcome_screen.png' %}')] bg-cover bg-no-repeat bg-center">
+
+        </div>
+        <h1 class="relative z-10  text-2xl font-bold capitalize text-blue-600 text-center pt-10">book now</h1>
+    </section>
 </body>
 
 </html>

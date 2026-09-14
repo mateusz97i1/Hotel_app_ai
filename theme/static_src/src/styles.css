@@ -9,3 +9,13 @@
   * the scope of this path.
   */
 @source "../../../**/*.{html,py,js}";
+
+@theme {
+  --color-terracotta: #C9A896;
+  --color-poolblue: #4FA8C9;
+  --color-sand: #FAF6F1;
+  --color-olive: #7C8B6F;
+  --color-charcoal: #2E2A26;
+
+  --font-roboto: "Roboto", sans-serif;
+}
