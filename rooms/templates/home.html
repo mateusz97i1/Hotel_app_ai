@@ -20,13 +20,27 @@
 </head>
 
 <body class="min-h-dvh antialiased font-roboto h-fit">
+
     <!-- home screen -->
     <section class="relative min-h-dvh w-full">
-        <div class="min-h-dvh w-full bg-[url('{% static 'png/Welcome_screen.png' %}')] bg-cover bg-no-repeat bg-center">
+        <!-- bg welcome photo -->
+        <div
+            class="flex flex-col min-h-dvh items-center justify-center w-full bg-[url('/static/png/Welcome_hd.png')] bg-cover bg-no-repeat bg-center">
+
+            <!-- middle titie -->
+            <div class="flex flex-col z-10  text-5xl font-normal capitalize text-gray-100 text-center pt-10">
+                <h1>discover philoxenia</h1>
+                <h2>a place of life experiences</h2>
+            </div>
+            <!-- book button -->
+            <div class="absolute bottom-8 z-10">
+                <a href="{% url 'rooms:home' %}"
+                    class="btn-lg text-2xl px-10 py-4 rounded-2xl text-white font-normal bg-charcoal capitalize">Book
+                    now</a>
+            </div>
 
         </div>
-        <h1 class="relative z-10 bg-terracotta text-2xl font-bold capitalize text-blue-600 text-center pt-10">book now
-        </h1>
+
     </section>
 </body>
 
