@@ -23,20 +23,19 @@
 
     <!-- home screen -->
     <section class="relative min-h-dvh w-full">
-        <!-- bg welcome photo -->
+        <!-- bg room photo -->
         <div
-            class="flex flex-col min-h-dvh items-center justify-center w-full bg-[url('/static/png/welcome_darken_hd.png')] bg-cover bg-no-repeat bg-center">
+            class="flex flex-col min-h-dvh items-center justify-center w-full bg-[url('/static/png/room_photo.png')] bg-cover bg-no-repeat bg-center">
 
-            <!-- middle titie -->
-            <div class="flex flex-col z-10  text-5xl font-normal capitalize text-gray-100 text-center pt-10">
-                <h1>discover philoxenia</h1>
-                <h2>a place of life experiences</h2>
+            <!-- callendar -->
+            <div
+                class="flex flex-col z-10 bg-white text-5xl h-1/2 w-2/4 font-normal capitalize text-black text-center pt-10">
+                <p>calendar here to do</p>
             </div>
-            <!-- book button -->
+            <!-- check button -->
             <div class="absolute bottom-8 z-10">
-                <a href="{% url 'rooms:book_room' %}"
-                    class="btn-lg text-2xl px-10 py-4 rounded-2xl text-white font-normal bg-charcoal capitalize">Book
-                    now</a>
+                <a href="#"
+                    class="btn-lg text-2xl px-10 py-4 rounded-2xl text-white font-normal bg-charcoal capitalize">check</a>
             </div>
 
         </div>
