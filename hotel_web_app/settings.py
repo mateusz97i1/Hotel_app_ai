@@ -105,8 +105,15 @@ WSGI_APPLICATION = 'hotel_web_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': os.getenv('DATABASE_HOST'),
+        'PORT': os.getenv('DATABASE_PORT'),
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
     }
 }
 
@@ -187,6 +194,24 @@ if DEBUG:
     ]
 
 #----------------------- Allauth---------------------------
+# ALLAUTH SETUP
+SITE_ID = 1
+
+ACCOUNT_LOGIN_METHODS = {"email"}
+
+# email is manadatory for looging
+ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
+ACCOUNT_UNIQUE_EMAIL = True
+
+#  email verification
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+# proceed automatically to google login
+SOCIALACCOUNT_LOGIN_ON_GET = False
+
+# LOGINOUT URL
+LOGIN_URL = "account_login"
+LOGIN_REDIRECT_URL = "rooms:home"
+LOGOUT_REDIRECT_URL = "rooms:home"
 
 # Provider specific settings
 SOCIALACCOUNT_PROVIDERS = {
@@ -195,8 +220,8 @@ SOCIALACCOUNT_PROVIDERS = {
         # (``socialaccount`` app) containing the required client
         # credentials, or list them here:
         'APP': {
-            'client_id': '123',
-            'secret': '456',
+            'client_id': os.getenv('ALLAUTH_CLIENT_ID'),
+            'secret': os.getenv('ALLAUTH_SECRET_KEY'),
             'key': ''
         }
     }
