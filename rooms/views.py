@@ -1,11 +1,12 @@
 import logging
 
 from django.shortcuts import render, redirect
+from django.views.decorators.http import require_safe
 
 
 logger = logging.getLogger(__name__)
 
-
+@require_safe
 def home(request):
 #simple home page
     return render(request, 'home.html')
