@@ -160,4 +160,85 @@ class TestReservation:
 
 
     def test_check_out_before_check_in_raises(self, room: HotelRoom, guest: HotelGuest) -> None:
-        pass
+
+        reservation_fail = Reservation(
+            room = room,
+            guest = guest,
+            number_of_guests =2,
+            check_in = date(2026,9,2),
+            check_out =date(2026,9,1),
+        )
+
+        with pytest.raises(ValidationError):
+            reservation_fail.full_clean()
+
+
+    def test_overlapping_reservation_raises(self, room: HotelRoom, guest:HotelGuest) -> None:
+
+        reservation = Reservation.objects.create(
+                    room = room,
+                    guest = guest,
+                    number_of_guests =2,
+                    check_in = date.today(),
+                    check_out =date.today() + timedelta(days=5),
+                )
+
+        overlapping = Reservation(
+            room = room,
+            guest = guest,
+            number_of_guests =2,
+            check_in = date.today()+ timedelta(days=1),
+            check_out =date.today() + timedelta(days=5),
+        )
+
+        with pytest.raises(ValidationError):
+            overlapping.full_clean()
+
+
+    def test_non_overlaping_reservation_allowed(self, room: HotelRoom, guest: HotelGuest) -> None:
+
+        reservation = Reservation.objects.create(
+            room = room,
+            guest = guest,
+            number_of_guests =2,
+            check_in = date.today(),
+            check_out =date.today() + timedelta(days=5),
+        )
+
+        non_overlapping = Reservation(
+            room = room,
+            guest = guest,
+            number_of_guests =2,
+            check_in = date.today()+ timedelta(days=5),
+            check_out =date.today() + timedelta(days=7),
+        )
+        #should not raise error here
+        non_overlapping.full_clean()
+        non_overlapping.save()
+
+        assert non_overlapping.pk is not None
+
+
+    def test_cancelled_reservation_does_not_block_overlap(self, room: HotelRoom, guest:HotelGuest) -> None:
+
+        reservation = Reservation.objects.create(
+            room = room,
+            guest = guest,
+            number_of_guests =2,
+            check_in = date.today(),
+            check_out =date.today() + timedelta(days=5),
+            is_cancelled = True
+        )
+
+        new_reservation = Reservation(
+            room = room,
+            guest = guest,
+            number_of_guests =2,
+            check_in = date.today(),
+            check_out =date.today() + timedelta(days=5),
+        )
+        #should not raise error here, existing reservation is cancelled
+        new_reservation.full_clean()
+        new_reservation.save()
+
+        assert new_reservation.pk is not None
