@@ -2,6 +2,8 @@ import uuid
 
 from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator
+
 from django.db import models
 
 
@@ -67,7 +69,7 @@ class Reservation(models.Model):
     guest = models.ForeignKey(
         HotelGuest, on_delete=models.PROTECT, related_name="reservations"
     )
-    number_of_guests = models.PositiveSmallIntegerField()
+    number_of_guests = models.PositiveSmallIntegerField(validators=[MinValueValidator(1)])
     check_in = models.DateField()
     check_out = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -84,8 +86,17 @@ class Reservation(models.Model):
         ]
 
     def clean(self):
+
+        if not (self.check_in and self.check_out and self.room_id):
+            return
+        
         if self.check_out <= self.check_in:
             raise ValidationError("Check out must be after Check in.")
+
+        if self.number_of_guests> self.room.max_guests:
+            raise ValidationError(
+                f"This room allow max number of guests: {self.room.max_guests}"
+            )
 
         overlapping = Reservation.objects.filter(
             room = self.room,

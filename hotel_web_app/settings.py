@@ -171,7 +171,6 @@ MAILERS = {
     },
 }
 
-SITE_ID = 1
 
 #--------------------------Logger------------------------------
 #setting a logging save info
@@ -222,7 +221,13 @@ SOCIALACCOUNT_PROVIDERS = {
         'APP': {
             'client_id': os.getenv('ALLAUTH_CLIENT_ID'),
             'secret': os.getenv('ALLAUTH_SECRET_KEY'),
-            'key': ''
+            'key': '',
+            'settings':{
+                "scope": [
+                        "profile",
+                        "email",
+                    ],
+            }
         }
     }
 }

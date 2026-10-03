@@ -1,6 +1,7 @@
 {% load static %}
 {% load django_htmx %}
 {% load tailwind_tags %}
+{% load socialaccount %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +35,7 @@
             </div>
             <!-- check button -->
             <div class="absolute bottom-8 z-10">
-                <a href="#"
+                <a href="{% url 'account_login' %}"
                     class="btn-lg text-2xl px-10 py-4 rounded-2xl text-white font-normal bg-charcoal capitalize">check</a>
             </div>
 
