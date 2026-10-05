@@ -4,7 +4,7 @@ from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 
-from django.db import models
+from django.db import models, transaction
 
 
 class Building(models.TextChoices):
@@ -111,8 +111,10 @@ class Reservation(models.Model):
 
 
     def save(self, *args, **kwargs):
-        self.full_clean()
-        super().save(*args, **kwargs)
+        with transaction.atomic():
+            HotelRoom.objects.select_for_update().get(pk=self.room_id)
+            self.full_clean()
+            super().save(*args, **kwargs)
         
     def __str__(self):
         return f"Booking {self.booking_id}: {self.room} for {self.guest} ({self.check_in} -> {self.check_out})"
