@@ -1,7 +1,9 @@
 {% load static %}
 {% load django_htmx %}
 {% load tailwind_tags %}
+{% load tailwind_filters %}
 {% load socialaccount %}
+{% load crispy_forms_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,8 +32,12 @@
 
             <!-- callendar -->
             <div
-                class="flex flex-col z-10 bg-white text-5xl h-1/2 w-2/4 font-normal capitalize text-black text-center pt-10">
-                <p>calendar here to do</p>
+                class="flex flex-col z-10 bg-white text-xl h-1/2 w-2/4 font-normal capitalize text-black text-center pt-10">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ reservation_form|crispy }}
+                    <button type="submit" class="...">check</button>
+                </form>
             </div>
             <!-- check button -->
             <div class="absolute bottom-8 z-10">

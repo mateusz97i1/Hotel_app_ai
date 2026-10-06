@@ -1,3 +1,4 @@
+from django import forms
 from django.forms import ModelForm
 
 from rooms.models import HotelGuest, Reservation
@@ -13,3 +14,7 @@ class HotelReservationForm(ModelForm):
     class Meta:
         model= Reservation
         fields = ["room","number_of_guests","check_in","check_out"]
+        widgets = {
+            "check_in": forms.DateInput(attrs={"type": "date"}),
+            "check_out": forms.DateInput(attrs={"type": "date"}),
+        }
