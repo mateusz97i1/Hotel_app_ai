@@ -5,7 +5,12 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_safe
 
 
+from rooms.forms import HotelReservationForm, HotelGuestForm
+
+
 logger = logging.getLogger(__name__)
+
+
 
 @require_safe
 def home(request: HttpRequest) -> HttpResponse:
@@ -15,4 +20,7 @@ def home(request: HttpRequest) -> HttpResponse:
 
 def book_room(request: HttpRequest) -> HttpResponse:
     """check room avaliability in db"""
-    return render(request,'book_room.html')
+
+    reservation_form = HotelReservationForm()
+
+    return render(request,'book_room.html',context={'reservation_form':reservation_form})

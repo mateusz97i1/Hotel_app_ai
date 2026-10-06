@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'crispy_forms',
+    "crispy_tailwind",
 
 ]
 
@@ -231,3 +233,7 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+#---------------CRISPY FORMS-------------------------
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+
+CRISPY_TEMPLATE_PACK = "tailwind"
