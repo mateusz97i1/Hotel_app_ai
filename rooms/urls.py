@@ -5,6 +5,6 @@ app_name='rooms'
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('book',views.book_room, name='book_room')
+    path('book',views.check_room_avaliability, name='book_room')
 ]
 
