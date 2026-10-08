@@ -2,7 +2,7 @@ import logging
 
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render, redirect
-from django.views.decorators.http import require_safe
+from django.views.decorators.http import require_safe, require_GET
 
 
 from rooms.forms import HotelReservationForm, HotelGuestForm
@@ -18,7 +18,7 @@ def home(request: HttpRequest) -> HttpResponse:
     return render(request, 'home.html')
 
 
-def book_room(request: HttpRequest) -> HttpResponse:
+def check_room_avaliability(request: HttpRequest) -> HttpResponse:
     """check room avaliability in db"""
 
     reservation_form = HotelReservationForm()

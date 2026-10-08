@@ -2,7 +2,7 @@ import uuid
 
 from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 from django.db import models, transaction
 
@@ -15,6 +15,15 @@ class Building(models.TextChoices):
 class RoomCapacity(models.IntegerChoices):
     TWO = 2, "Up to 2 guests"
     FOUR = 4, "Up to 4 guests"
+
+
+class NumberOfGuest(models.IntegerChoices):
+    ONE = 1, "1"
+    TWO = 2, "2"
+    THREE = 3, "3"
+    FOUR = 4, "4"
+    FIVE = 5, "5"
+    SIX = 6, "6"
 
 
 class HotelRoom(models.Model):
@@ -69,7 +78,7 @@ class Reservation(models.Model):
     guest = models.ForeignKey(
         HotelGuest, on_delete=models.PROTECT, related_name="reservations"
     )
-    number_of_guests = models.PositiveSmallIntegerField(validators=[MinValueValidator(1)])
+    number_of_guests = models.PositiveSmallIntegerField(choices=NumberOfGuest.choices ,validators=[MinValueValidator(1), MaxValueValidator(6)])
     check_in = models.DateField()
     check_out = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
