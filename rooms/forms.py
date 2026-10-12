@@ -20,7 +20,7 @@ class HotelReservationForm(ModelForm):
         }
 
 
-class AvaliabilityForm(forms.Form):
+class AvailabilityForm(forms.Form):
     """Checks room avaliability"""
     check_in = forms.DateField(widget=forms.DateInput(attrs={"type":"date"}))
     check_out = forms.DateField(widget=forms.DateInput(attrs={"type":"date"}))
