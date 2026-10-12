@@ -33,16 +33,24 @@
             <!-- callendar -->
             <div
                 class="flex flex-col z-10 bg-white text-xl h-1/2 w-2/4 font-normal capitalize text-black text-center pt-10">
-                <form method="post">
+                <form method="get">
                     {% csrf_token %}
-                    {{ reservation_form|crispy }}
-                    <button type="submit" class="...">check</button>
+                    {{ availability_form|crispy }}
+                    <button type="submit"
+                        class="btn-lg text-2xl px-10 py-4 rounded-2xl text-white font-normal bg-charcoal capitalize">check</button>
+
                 </form>
             </div>
-            <!-- check button -->
-            <div class="absolute bottom-8 z-10">
-                <a href="{% url 'account_login' %}"
-                    class="btn-lg text-2xl px-10 py-4 rounded-2xl text-white font-normal bg-charcoal capitalize">check</a>
+
+            <!-- results -->
+            <div>
+                {% if available_rooms is not None %}
+                {% for room in available_rooms %}
+                <p>{{ room }}</p>
+                {% empty %}
+                <p>No available room in this date.</p>
+                {% endfor %}
+                {% endif %}
             </div>
 
         </div>
