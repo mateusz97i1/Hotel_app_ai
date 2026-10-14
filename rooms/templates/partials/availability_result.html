@@ -1,0 +1,10 @@
+<!-- results -->
+<div id="result" class="z-10 bg-white/90 mt-4 p-4">
+    {% if available_rooms is not None %}
+    {% for room in available_rooms %}
+    <p>{{ room }}</p>
+    {% empty %}
+    <p>No available room in this date.</p>
+    {% endfor %}
+    {% endif %}
+</div>

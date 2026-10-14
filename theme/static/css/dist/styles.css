@@ -14,6 +14,10 @@
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
+    --text-lg: 1.125rem;
+    --text-lg--line-height: calc(1.75 / 1.125);
+    --text-xl: 1.25rem;
+    --text-xl--line-height: calc(1.75 / 1.25);
     --text-2xl: 1.5rem;
     --text-2xl--line-height: calc(2 / 1.5);
     --text-5xl: 3rem;
@@ -277,6 +281,9 @@
   .static {
     position: static;
   }
+  .inset-x-0 {
+    inset-inline: 0px;
+  }
   @layer daisyui.l1.l2 {
     .toast-end {
       inset-inline-start: auto;
@@ -289,11 +296,17 @@
       --toast-y: 0;
     }
   }
+  .top-0 {
+    top: 0px;
+  }
   .bottom-8 {
     bottom: calc(var(--spacing) * 8);
   }
   .z-10 {
     z-index: 10;
+  }
+  .z-20 {
+    z-index: 20;
   }
   .container {
     width: 100%;
@@ -325,6 +338,9 @@
   }
   .mx-auto {
     margin-inline: auto;
+  }
+  .mt-4 {
+    margin-top: calc(var(--spacing) * 4);
   }
   .alert {
     border-width: var(--border);
@@ -362,23 +378,26 @@
       grid-template-columns: auto minmax(auto, 1fr);
     }
   }
+  .block {
+    display: block;
+  }
   .flex {
     display: flex;
   }
   .h-1\/2 {
     height: calc(1 / 2 * 100%);
   }
-  .h-1\/4 {
-    height: calc(1 / 4 * 100%);
-  }
-  .h-2\/4 {
-    height: calc(2 / 4 * 100%);
+  .h-20 {
+    height: calc(var(--spacing) * 20);
   }
   .h-fit {
     height: fit-content;
   }
   .h-screen {
     height: 100vh;
+  }
+  .max-h-20 {
+    max-height: calc(var(--spacing) * 20);
   }
   .min-h-dvh {
     min-height: 100dvh;
@@ -389,14 +408,35 @@
   .w-2\/4 {
     width: calc(2 / 4 * 100%);
   }
+  .w-20 {
+    width: calc(var(--spacing) * 20);
+  }
   .w-full {
     width: 100%;
+  }
+  .max-w-20 {
+    max-width: calc(var(--spacing) * 20);
+  }
+  .min-w-full {
+    min-width: 100%;
+  }
+  .flex-1 {
+    flex: 1;
   }
   .flex-col {
     flex-direction: column;
   }
+  .flex-row {
+    flex-direction: row;
+  }
+  .content-between {
+    align-content: space-between;
+  }
   .items-center {
     align-items: center;
+  }
+  .justify-between {
+    justify-content: space-between;
   }
   .justify-center {
     justify-content: center;
@@ -413,8 +453,25 @@
   .bg-white {
     background-color: var(--color-white);
   }
-  .bg-\[url\(\'\/static\/png\/Welcome_hd\.png\'\)\] {
-    background-image: url('/static/png/Welcome_hd.png');
+  .bg-white\/90 {
+    background-color: color-mix(in srgb, #fff 90%, transparent);
+  }
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-white\/90 {
+      background-color: color-mix(in oklab, var(--color-white) 90%, transparent);
+    }
+  }
+  .bg-gradient-to-b {
+    --tw-gradient-position: to bottom in oklab;
+    background-image: linear-gradient(var(--tw-gradient-stops));
+  }
+  .bg-gradient-to-r {
+    --tw-gradient-position: to right in oklab;
+    background-image: linear-gradient(var(--tw-gradient-stops));
+  }
+  .bg-gradient-to-t {
+    --tw-gradient-position: to top in oklab;
+    background-image: linear-gradient(var(--tw-gradient-stops));
   }
   .bg-\[url\(\'\/static\/png\/room_photo\.png\'\)\] {
     background-image: url('/static/png/room_photo.png');
@@ -422,11 +479,9 @@
   .bg-\[url\(\'\/static\/png\/welcome_darken_hd\.png\'\)\] {
     background-image: url('/static/png/welcome_darken_hd.png');
   }
-  .bg-\[url\(\'static\/png\/room_photo\.png\'\)\] {
-    background-image: url('static/png/room_photo.png');
-  }
-  .bg-\[url\(\'static\\png\\room_photo\.png\'\)\] {
-    background-image: url('static\png\room_photo.png');
+  .from-charcoal {
+    --tw-gradient-from: var(--color-charcoal);
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
   }
   .bg-cover {
     background-size: cover;
@@ -436,6 +491,12 @@
   }
   .bg-no-repeat {
     background-repeat: no-repeat;
+  }
+  .p-4 {
+    padding: calc(var(--spacing) * 4);
+  }
+  .p-10 {
+    padding: calc(var(--spacing) * 10);
   }
   .px-10 {
     padding-inline: calc(var(--spacing) * 10);
@@ -462,6 +523,14 @@
   .text-5xl {
     font-size: var(--text-5xl);
     line-height: var(--tw-leading, var(--text-5xl--line-height));
+  }
+  .text-lg {
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
+  }
+  .text-xl {
+    font-size: var(--text-xl);
+    line-height: var(--tw-leading, var(--text-xl--line-height));
   }
   .leading-normal {
     --tw-leading: var(--leading-normal);
@@ -503,6 +572,11 @@
       --fontsize: 1.125rem;
       --btn-p: 1.25rem;
       --size: calc(var(--size-field, 0.25rem) * 12);
+    }
+    .btn-sm {
+      --fontsize: 0.75rem;
+      --btn-p: 0.75rem;
+      --size: calc(var(--size-field, 0.25rem) * 8);
     }
   }
   @layer daisyui.l1.l2.l3 {
@@ -783,6 +857,48 @@
     background-position-x: -115%;
   }
 }
+@property --tw-gradient-position {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-gradient-from {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+@property --tw-gradient-via {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+@property --tw-gradient-to {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+@property --tw-gradient-stops {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-gradient-via-stops {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-gradient-from-position {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+@property --tw-gradient-via-position {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 50%;
+}
+@property --tw-gradient-to-position {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
 @property --tw-leading {
   syntax: "*";
   inherits: false;
@@ -798,6 +914,15 @@
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
+      --tw-gradient-position: initial;
+      --tw-gradient-from: #0000;
+      --tw-gradient-via: #0000;
+      --tw-gradient-to: #0000;
+      --tw-gradient-stops: initial;
+      --tw-gradient-via-stops: initial;
+      --tw-gradient-from-position: 0%;
+      --tw-gradient-via-position: 50%;
+      --tw-gradient-to-position: 100%;
       --tw-leading: initial;
       --tw-font-weight: initial;
       --tw-tracking: initial;

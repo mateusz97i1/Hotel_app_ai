@@ -1,47 +1,22 @@
-{% load static %}
-{% load django_htmx %}
-{% load tailwind_tags %}
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block title %}Home{% endblock title %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Roboto font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+{% block content %}
+<section class="relative min-h-dvh w-full">
+    <div
+        class="flex flex-col min-h-dvh items-center justify-center w-full bg-[url('/static/png/welcome_darken_hd.png')] bg-cover bg-no-repeat bg-center">
 
-    {% tailwind_css %}
-    {% django_htmx_script %}
-    <title>Home</title>
-</head>
-
-<body class="min-h-dvh antialiased font-roboto h-fit">
-
-    <!-- home screen -->
-    <section class="relative min-h-dvh w-full">
-        <!-- bg welcome photo -->
-        <div
-            class="flex flex-col min-h-dvh items-center justify-center w-full bg-[url('/static/png/welcome_darken_hd.png')] bg-cover bg-no-repeat bg-center">
-
-            <!-- middle titie -->
-            <div class="flex flex-col z-10  text-5xl font-normal capitalize text-gray-100 text-center pt-10">
-                <h1>discover philoxenia</h1>
-                <h2>a place of life experiences</h2>
-            </div>
-            <!-- book button -->
-            <div class="absolute bottom-8 z-10">
-                <a href="{% url 'rooms:room_availability' %}"
-                    class="btn-lg text-2xl px-10 py-4 rounded-2xl text-white font-normal bg-charcoal capitalize">Book
-                    now</a>
-            </div>
-
+        <div class="flex flex-col z-10 text-5xl font-normal capitalize text-gray-100 text-center pt-10">
+            <h1>discover philoxenia</h1>
+            <h2>a place of life experiences</h2>
         </div>
 
-    </section>
-</body>
-
-</html>
+        <div class="absolute bottom-8 z-10">
+            <a href="{% url 'rooms:room_availability' %}"
+                class="btn-lg text-2xl px-10 py-4 rounded-2xl text-white font-normal bg-charcoal capitalize">Book
+                now</a>
+        </div>
+    </div>
+</section>
+{% endblock content %}

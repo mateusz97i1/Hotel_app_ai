@@ -1,0 +1,37 @@
+{% load static %}
+{% load django_htmx %}
+{% load tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    {% tailwind_css %}
+    {% django_htmx_script %}
+    <title>{% block title %}Philoxenia{% endblock title %}</title>
+</head>
+
+<body class="min-h-dvh antialiased font-roboto">
+
+    <header class="absolute inset-x-0 top-0 z-20 h-20 flex flex-row justify-between bg-gradient-to-b from-charcoal">
+        <a href="{% url 'rooms:home' %}"
+            class="btn-sm text-lg px-10 py-4 rounded-2xl text-white font-normal capitalize">
+            home
+        </a>
+        <a href="/" class="btn-sm text-lg px-10 py-4 rounded-2xl text-white font-normal capitalize">
+            login
+        </a>
+    </header>
+
+    {% block content %}{% endblock content %}
+
+</body>
+
+</html>

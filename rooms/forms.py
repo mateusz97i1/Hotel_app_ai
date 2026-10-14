@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import ModelForm
+from django.utils import timezone
 
 from rooms.models import HotelGuest, Reservation, NumberOfGuest
 
@@ -22,7 +23,10 @@ class HotelReservationForm(ModelForm):
 
 class AvailabilityForm(forms.Form):
     """Checks room avaliability"""
-    check_in = forms.DateField(widget=forms.DateInput(attrs={"type":"date"}))
+    check_in = forms.DateField(
+        initial=timezone.localdate, 
+        widget=forms.DateInput(attrs={"type":"date"})
+    )
     check_out = forms.DateField(widget=forms.DateInput(attrs={"type":"date"}))
     number_of_guest = forms.TypedChoiceField(choices=NumberOfGuest.choices, initial=NumberOfGuest.ONE)
 
