@@ -28,22 +28,20 @@ def check_room_availability(request: HttpRequest) -> HttpResponse:
     form = AvailabilityForm(request.GET or None)
     rooms = None
 
-    if form.is_valid():
-        check_in_form = form.cleaned_data["check_in"]
-        check_out_form = form.cleaned_data["check_out"]
-        guests = form.cleaned_data["number_of_guest"]
-
+    if form.is_bound and form.is_valid():
+        data = form.cleaned_data
         busy = Reservation.objects.filter(
-            room = OuterRef("pk"),
-            is_cancelled = False,
-            check_in__lt = check_out_form,
-            check_out__gt = check_in_form,
+            room=OuterRef("pk"),
+            is_cancelled=False,
+            check_in__lt=data["check_out"],
+            check_out__gt=data["check_in"],
         )
+        rooms = HotelRoom.objects.filter(
+            max_guests__gte=data["number_of_guest"]
+        ).filter(~Exists(busy))
 
-        rooms = HotelRoom.objects.filter(max_guests__gte=guests).filter(~Exists(busy))
+    context = {"availability_form": form, "available_rooms": rooms}
 
-    return render(
-        request,
-        "book_room.html",
-        context={"availability_form": form, "available_rooms": rooms},
-    )
+    if request.htmx:
+        return render(request, "partials/availability_result.html", context)
+    return render(request, "check_availability.html", context)
