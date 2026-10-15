@@ -23,3 +23,21 @@ class TestBaseView:
 
         assert response.status_code == 200
         assert self.template_name in [t.name for t in response.templates]
+
+
+
+class TestRoomAvailabilityView:
+    """checks room availability in db"""
+
+
+    url_name ="rooms:room_availability"
+    template_name = "check_availability.html"
+
+    def test_template_renders_correctly(self, client: Client) -> None:
+
+        url = reverse(self.url_name)
+
+        response = client.get(url)
+
+        assert response.status_code == 200
+        assert self.template_name in [t.name for t in response.templates]

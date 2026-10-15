@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_safe, require_GET
 from django.db.models import Exists, OuterRef
+from django_ratelimit.decorators import ratelimit
 
 
 from rooms.forms import HotelReservationForm, HotelGuestForm, AvailabilityForm
@@ -22,6 +23,7 @@ def home(request: HttpRequest) -> HttpResponse:
 
 
 @require_GET
+@ratelimit(key="ip", rate="100/h", block=True)
 def check_room_availability(request: HttpRequest) -> HttpResponse:
     """check room availability in db"""
 
