@@ -37,7 +37,7 @@ class AvailabilityForm(forms.Form):
         check_in = cleaned.get("check_in")
         check_out = cleaned.get("check_out")
 
-        if check_in > check_out and check_out < check_in :
+        if check_in and check_out and check_out <= check_in:
             raise forms.ValidationError("Check out must be after Check in.")
 
         return cleaned
