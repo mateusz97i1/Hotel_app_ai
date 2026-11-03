@@ -30,7 +30,7 @@ def check_room_availability(request: HttpRequest) -> HttpResponse:
     form = AvailabilityForm(request.GET or None)
     rooms = None
 
-    if form.is_bound and form.is_valid():
+    if form.is_bound and form.is_valid(): #bound means that form contains data- is not empty
         data = form.cleaned_data
         busy = Reservation.objects.filter(
             room=OuterRef("pk"),
@@ -47,3 +47,8 @@ def check_room_availability(request: HttpRequest) -> HttpResponse:
     if request.htmx:
         return render(request, "partials/availability_result.html", context)
     return render(request, "check_availability.html", context)
+
+
+def booking_page(request):
+
+    return render(request,'booking_page.html')

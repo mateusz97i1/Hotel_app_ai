@@ -384,53 +384,29 @@
   .flex {
     display: flex;
   }
-  .h-1\/2 {
-    height: calc(1 / 2 * 100%);
-  }
   .h-20 {
     height: calc(var(--spacing) * 20);
-  }
-  .h-fit {
-    height: fit-content;
   }
   .h-screen {
     height: 100vh;
   }
-  .max-h-20 {
-    max-height: calc(var(--spacing) * 20);
-  }
   .min-h-dvh {
     min-height: 100dvh;
-  }
-  .w-1\/4 {
-    width: calc(1 / 4 * 100%);
   }
   .w-2\/4 {
     width: calc(2 / 4 * 100%);
   }
-  .w-20 {
-    width: calc(var(--spacing) * 20);
-  }
   .w-full {
     width: 100%;
   }
-  .max-w-20 {
-    max-width: calc(var(--spacing) * 20);
-  }
-  .min-w-full {
-    min-width: 100%;
-  }
-  .flex-1 {
-    flex: 1;
+  .cursor-pointer {
+    cursor: pointer;
   }
   .flex-col {
     flex-direction: column;
   }
   .flex-row {
     flex-direction: row;
-  }
-  .content-between {
-    align-content: space-between;
   }
   .items-center {
     align-items: center;
@@ -465,14 +441,6 @@
     --tw-gradient-position: to bottom in oklab;
     background-image: linear-gradient(var(--tw-gradient-stops));
   }
-  .bg-gradient-to-r {
-    --tw-gradient-position: to right in oklab;
-    background-image: linear-gradient(var(--tw-gradient-stops));
-  }
-  .bg-gradient-to-t {
-    --tw-gradient-position: to top in oklab;
-    background-image: linear-gradient(var(--tw-gradient-stops));
-  }
   .bg-\[url\(\'\/static\/png\/room_photo\.png\'\)\] {
     background-image: url('/static/png/room_photo.png');
   }
@@ -497,6 +465,9 @@
   }
   .p-10 {
     padding: calc(var(--spacing) * 10);
+  }
+  .px-8 {
+    padding-inline: calc(var(--spacing) * 8);
   }
   .px-10 {
     padding-inline: calc(var(--spacing) * 10);
@@ -572,6 +543,11 @@
       --fontsize: 1.125rem;
       --btn-p: 1.25rem;
       --size: calc(var(--size-field, 0.25rem) * 12);
+    }
+    .btn-md {
+      --fontsize: 0.875rem;
+      --btn-p: 1rem;
+      --size: calc(var(--size-field, 0.25rem) * 10);
     }
     .btn-sm {
       --fontsize: 0.75rem;

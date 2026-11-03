@@ -25,9 +25,21 @@
             class="btn-sm text-lg px-10 py-4 rounded-2xl text-white font-normal capitalize">
             home
         </a>
-        <a href="/" class="btn-sm text-lg px-10 py-4 rounded-2xl text-white font-normal capitalize">
-            login
+
+
+        {% if user.is_authenticated %}
+        <a href="{% url 'account_logout' %}"
+            class="btn-sm text-lg px-10 py-4 rounded-2xl text-white font-normal capitalize">
+            Sign out
         </a>
+        {% else %}
+        <a href="{% url 'account_login' %}"
+            class="btn-sm text-lg px-10 py-4 rounded-2xl text-white font-normal capitalize">
+            Sign in
+        </a>
+        {% endif %}
+
+
     </header>
 
     {% block content %}{% endblock content %}

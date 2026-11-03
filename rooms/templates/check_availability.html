@@ -15,10 +15,17 @@
             <form hx-get="{% url 'rooms:room_availability' %}" hx-target="#result" hx-indicator="" hx-swap="outerHTML">
                 {{ availability_form|crispy }}
                 <button type="submit"
-                    class="btn-lg text-2xl px-10 py-4 rounded-2xl text-white font-normal bg-charcoal capitalize">check</button>
+                    class="btn-lg cursor-pointer text-2xl px-10 py-4 rounded-2xl text-white font-normal bg-charcoal capitalize">check</button>
             </form>
         </div>
+
+        {% if available_rooms %}
+
         {% include 'partials/availability_result.html' %}
+
+        {% endif %}
+
+
     </div>
 </section>
 {% endblock content %}

@@ -16,21 +16,42 @@ class HotelReservationForm(ModelForm):
         model= Reservation
         fields = ["room","number_of_guests","check_in","check_out"]
         widgets = {
-            "check_in": forms.DateInput(attrs={"type": "date"}),
-            "check_out": forms.DateInput(attrs={"type": "date"}),
+            "check_in": forms.DateInput(attrs={"type": "date"},format="%Y-%m-%d"),
+            "check_out": forms.DateInput(attrs={"type": "date"},format="%Y-%m-%d"),
         }
+
+        def clean_check_in(self):
+            """make sure booking reservation in the past is not possible"""
+
+            value=self.cleaned_data["check_in"]
+            if value < timezone.localdate():
+                raise forms.ValidationError("Check in can not be in the past")
+            return value
+
 
 
 class AvailabilityForm(forms.Form):
     """Checks room avaliability"""
     check_in = forms.DateField(
         initial=timezone.localdate, 
-        widget=forms.DateInput(attrs={"type":"date"})
+        widget=forms.DateInput(attrs={"type":"date"}, format="%Y-%m-%d")
     )
-    check_out = forms.DateField(widget=forms.DateInput(attrs={"type":"date"}))
-    number_of_guest = forms.TypedChoiceField(choices=NumberOfGuest.choices, initial=NumberOfGuest.ONE)
+    check_out = forms.DateField(widget=forms.DateInput(attrs={"type":"date"},format="%Y-%m-%d"))
+    number_of_guest = forms.TypedChoiceField(
+        choices=NumberOfGuest.choices,
+        coerce=int,
+        initial=NumberOfGuest.ONE
+    )
 
+    def clean_check_in(self):
+        """make sure booking reservation in the past is not possible"""
+        
+        value=self.cleaned_data["check_in"]
+        if value < timezone.localdate():
+            raise forms.ValidationError("Check in can not be in the past")
+        return value
 
+    
     def clean(self):
         cleaned= super().clean()
 
