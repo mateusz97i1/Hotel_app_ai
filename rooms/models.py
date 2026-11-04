@@ -3,6 +3,7 @@ import uuid
 from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.conf import settings
 
 from django.db import models, transaction
 
@@ -63,15 +64,31 @@ class HotelGuest(models.Model):
     post_code = models.CharField(max_length=20)
     phone = models.CharField(max_length=20, validators=[phone_validator])
     email = models.EmailField()
+    #account related to "my reservation panel"
+    account = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        null= True,
+        blank= True,
+        on_delete= models.SET_NULL,
+        related_name="guest_profile"
+    )
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
 
 class Reservation(models.Model):
-    """A booking linking a guest to a room for a given date range."""
+    """A booking linking a guest to a room for a given date range.
+
+    booked_by: reffers to a person who made a reservation fe: online user or staff account
+    """
 
     booking_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    booked_by = models.ForeignKey(
+    settings.AUTH_USER_MODEL,
+    on_delete=models.PROTECT,
+    related_name="reservations",
+    )
     room = models.ForeignKey(
         HotelRoom, on_delete=models.PROTECT, related_name="reservations"
     )

@@ -6,7 +6,15 @@
     {% empty %}
     <p>No available room in this date.</p>
     {% endfor %}
-    <a href="/"
+    {% if user.is_authenticated %}
+    <a href="{% url 'rooms:booking' %}"
         class="btn-md cursor-pointer text-xl px-8 py-4 rounded-2xl text-white font-normal bg-charcoal capitalize">Book</a>
+    {% else %}
+    <a href="{% url 'account_login' %}" class="btn-sm text-lg px-10 py-4 rounded-2xl text-white font-normal capitalize">
+        Sign in
+    </a>
     {% endif %}
+
+    {% endif %}
+
 </div>
