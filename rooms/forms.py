@@ -43,3 +43,13 @@ class AvailabilityForm(forms.Form):
             raise forms.ValidationError("Check out must be after Check in.")
 
         return cleaned
+
+
+class ReservationForm(ModelForm):
+    class Meta:
+        model= Reservation
+        fields = ["room","number_of_guests","check_in","check_out"]
+        widgets = {
+            "check_in": forms.DateInput(attrs={"type": "date"}),
+            "check_out": forms.DateInput(attrs={"type": "date"}),
+        }

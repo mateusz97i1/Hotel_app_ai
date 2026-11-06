@@ -2,19 +2,23 @@
 <div id="result" class="z-10 flex flex-col items-center text-center bg-white/90 mt-4 p-4">
     {% if available_rooms is not None %}
     {% for room in available_rooms %}
-    <p>{{ room }}</p>
+    <div class="flex items-center gap-4 mb-2">
+        <p>{{ room }}</p>
+
+        {% if user.is_authenticated %}
+        <a href="{% url 'rooms:booking' room.pk %}?{{ qs }}"
+            class="btn-md cursor-pointer text-xl px-8 py-4 rounded-2xl text-white font-normal bg-charcoal capitalize">
+            Book
+        </a>
+        {% else %}
+        <a href="{% url 'account_login' %}?next={% url 'rooms:booking' room.pk %}?{{ qs|urlencode }}"
+            class="btn-sm text-lg px-10 py-4 rounded-2xl text-white font-normal capitalize">
+            Sign in to book
+        </a>
+        {% endif %}
+    </div>
     {% empty %}
     <p>No available room in this date.</p>
     {% endfor %}
-    {% if user.is_authenticated %}
-    <a href="{% url 'rooms:booking' %}"
-        class="btn-md cursor-pointer text-xl px-8 py-4 rounded-2xl text-white font-normal bg-charcoal capitalize">Book</a>
-    {% else %}
-    <a href="{% url 'account_login' %}" class="btn-sm text-lg px-10 py-4 rounded-2xl text-white font-normal capitalize">
-        Sign in
-    </a>
     {% endif %}
-
-    {% endif %}
-
 </div>
